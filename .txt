@@ -1,0 +1,220 @@
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { LinearGradient } from 'expo-linear-gradient';
+import Header from '../components/Header';
+import Category from '../components/Category';
+import ProductCard from '../components/ProductCard';
+
+const HomeScreen = () => {
+  return (
+    <LinearGradient 
+    colors={["#575757", "#000000"]}
+    style={styles.container}
+    >
+     <Header/>
+
+     <Category/>
+
+     <View>
+      <Text style={styles.feature}>Featured Product</Text>
+     </View>
+     <View style={{
+      flexDirection: "row",
+     }}>
+      <ProductCard/>
+     </View>
+
+     
+    </LinearGradient>
+  )
+}
+
+export default HomeScreen
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  feature: {
+    fontSize: "22px",
+    color: "#FFFFFF"
+  },
+});
+
+
+
+import React from 'react';
+import { Text, View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from './HomeScreen';
+import Entypo from 'react-native-vector-icons/Entypo';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Support from './Support';
+
+const Tab = createBottomTabNavigator();
+
+function Categories () {
+    return(
+        <View>
+            <Text>Hello</Text>
+        </View>
+    )
+};
+
+function Profile () {
+    return(
+        <View>
+            <Text>Hello</Text>
+        </View>
+    )
+};
+const Home = () => {
+    return(
+            <Tab.Navigator screenOptions={{
+                headerShown:false,
+                tabBarShowLabel:false,
+                tabBarActiveTintColor:"#987952",
+               
+            }}>
+        <Tab.Screen name="Home" component={HomeScreen} options={{
+            tabBarIcon:({color})=>{
+                return <Entypo name={"home"} size={25} color={color}/>;
+            },
+        }} />
+        <Tab.Screen name="Categories" component={Categories} options={{
+            tabBarIcon:({color})=>{
+                return <MaterialIcons name={"category"} size={25} color={color}/>;
+            },
+        }}  />
+        <Tab.Screen name="Support" component={Support} options={{
+            tabBarIcon:({color})=>{
+                return <Entypo name={"message"} size={25} color={color}/>;
+            },
+        }} />
+        <Tab.Screen name="Profile" component={Profile} options={{
+            tabBarIcon:({color})=>{
+                return <FontAwesome name={"user"} size={25} color={color}/>;
+            },
+        }} />
+      </Tab.Navigator>
+        
+    )
+};
+
+export default Home;
+
+
+import React from 'react';
+import { View, ScrollView, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Card, Button } from 'react-native-elements';
+
+const Category = () => {
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>New Product</Text>
+        <View style={styles.productsContainer}>
+          <Card>
+            <Card.Image source={require("../assets/images/feature1.png")} />
+            <Text style={styles.productTitle}>Luna Pearl</Text>
+            <Text style={styles.productDesigner}>Designed by Elise Stein</Text>
+          </Card>
+          <Card>
+            <Card.Image source={require("../assets/images/feature1.png")} />
+            <Text style={styles.productTitle}>Dark Wood</Text>
+            <Text style={styles.productDesigner}>Designed by John Doe</Text>
+          </Card>
+        </View>
+      </View>
+
+      {/* <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Rectangular Tiles</Text>
+        <TouchableOpacity style={styles.tileCard}>
+          <Image source={require("../assets/images/feature1.png")} style={styles.tileImage} />
+          <Text style={styles.tileLabel}>Rectangular Tiles</Text>
+        </TouchableOpacity>
+      </View> */}
+
+      {/* <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Decorative Tiles</Text>
+        <TouchableOpacity style={styles.tileCard}>
+          <Image source={require("../assets/images/feature1.png")} style={styles.tileImage} />
+          <Text style={styles.tileLabel}>Semi Glossy Ceramic</Text>
+          <Text style={styles.tileSubLabel}>by: Gedhar Trading Company</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tileCard}>
+          <Image source={require("../assets/images/feature1.png")} style={styles.tileImage} />
+          <Text style={styles.tileLabel}>Designer Tiles With Aluminium Profiles</Text>
+          <Text style={styles.tileSubLabel}>by: Ishika Tiles</Text>
+        </TouchableOpacity>
+      </View> */}
+
+
+        
+
+
+    </ScrollView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#000',
+  },
+  header: {
+    marginTop: 20,
+    paddingHorizontal: 10,
+  },
+  headerText: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  productsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginVertical: 10,
+  },
+  productTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
+  productDesigner: {
+    fontSize: 14,
+    color: '#888',
+  },
+  section: {
+    marginTop: 20,
+    paddingHorizontal: 10,
+  },
+  sectionTitle: {
+    color: '#fff',
+    fontSize: 22,
+    marginBottom: 10,
+  },
+  tileCard: {
+    marginBottom: 20,
+  },
+  tileImage: {
+    width: '100%',
+    height: 150,
+    borderRadius: 10,
+  },
+  tileLabel: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 10,
+    color: '#fff',
+  },
+  tileSubLabel: {
+    fontSize: 14,
+    color: '#888',
+  },
+});
+
+export default Category;
